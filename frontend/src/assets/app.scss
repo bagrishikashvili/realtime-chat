@@ -1,0 +1,150 @@
+* {
+    margin: 0em;
+    padding: 0em;
+}
+html, body {
+    margin: 0em;
+    padding: 0em;
+    font-size: 14px;
+    line-height: 14px;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ant-input-affix-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 0px 16px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #212121;
+    background-image: none;
+    border: 1px solid #212121;
+    border-radius: 10px;
+    transition: all 0.3s;
+    display: inline-flex;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #212121;
+  -webkit-text-fill-color: #cbcbcb;
+  -webkit-box-shadow: 0 0 0px 1000px #212121 inset;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-font-size: 14px;
+}
+
+.ant-input {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 2px 16px;
+    color: #cbcbcb;
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: rgb(33,33,33);
+    background-image: none;
+    border: 1px solid rgb(33,33,33);
+    border-radius: 10px;
+    transition: all 0.3s;
+    height: 45px;
+}
+
+::selection {
+    color: #858585;
+    background: rgb(0 0 0 / 85%);
+}
+
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+    border-color: #2f2f2f;
+    border-right-width: 1px;
+}
+
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+    border-color: #2f2f2f;
+    box-shadow: 0 0 0 1px #2f2f2f;
+    border-right-width: 1px;
+    outline: 0;
+}
+
+.ant-input:focus, .ant-input-focused {
+    border-color: #2f2f2f;
+    box-shadow: 0 0 0 1px #2f2f2f;
+    border-right-width: 1px;
+    outline: 0;
+}
+
+.ant-input:hover {
+    border-color: #2f2f2f;
+    border-right-width: 1px;
+}
+
+.ant-input-password-icon.anticon {
+    color: rgb(255 255 255 / 73%);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+
+.ant-input-password-icon.anticon:hover {
+    color: rgb(255 255 255 / 73%);
+}
+
+.ant-btn {
+    line-height: 1.5715;
+    position: relative;
+    display: inline-block;
+    font-weight: 900;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    height: 45px;
+    padding: 4px 4px;
+    font-size: 16px;
+    letter-spacing: -1px;
+    border-radius: 5px;
+    color: rgb(221 221 221 / 85%);
+    border: 0px;
+    background: linear-gradient(122.53deg,#4C54D2 0%,#BF14A2 56.25%,#F73A1C 100%) !important;
+}
+
+.ant-btn:active {
+    color: rgb(221 221 221 / 85%);
+    border-color: none;
+    background: none;
+}
+
+.ant-btn:hover, .ant-btn:focus {
+    color: rgb(221 221 221 / 85%);
+    border-color: none;
+    background: #fff;
+}
+
+.ant-btn:active {
+    transform: scale(0.99);
+}
