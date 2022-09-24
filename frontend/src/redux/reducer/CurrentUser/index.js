@@ -1,7 +1,8 @@
 import {
   START_VALUE_FAIL,
   START_VALUE_SUCCESS,
-  START_VALUE
+  START_VALUE,
+  START_CLEAR_VALUE
 } from './types';
 
 export default (state = {
@@ -27,6 +28,12 @@ export default (state = {
         return {
             data: {},
             error: action.error.response.data,
+            loading: false,
+      };
+      case START_CLEAR_VALUE:
+        return {
+            data: {},
+            error: {},
             loading: false,
       };
     default:

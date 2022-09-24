@@ -18,6 +18,18 @@ const getCurrentUser = async (req, res) => {
 }
 
 
+const getAllUsers = async (req, res) => {
+    try {
+        const user = await User.find();
+        res.status(200).json({users: user, message: "Welcome 🙌 "});
+    
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+
 module.exports = function (app) {
     app.get('/api/get-current-user', verify, getCurrentUser);
+    app.get('/api/get-all', verify, getAllUsers);
 };

@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 import { START_SIGNIN } from './../reducer/SignIn/types';
-import { START_VALUE, START_VALUE_SUCCESS } from './../reducer/CurrentUser/types';
+import { START_CLEAR_VALUE, START_VALUE_SUCCESS } from './../reducer/CurrentUser/types';
 
 export function login(values) {
     return {
@@ -19,6 +19,13 @@ export function setCurrentUser(user) {
 	return {
 		type: START_VALUE_SUCCESS,
 		payload: user
+	};
+}
+
+export function clearCurrentUser() {
+	return {
+		type: START_CLEAR_VALUE,
+		payload: {}
 	};
 }
 

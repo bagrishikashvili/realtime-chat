@@ -153,3 +153,36 @@ select:-webkit-autofill:focus {
     opacity: 0.2;
     cursor: disabled;
 }
+
+.adm-center-popup-body {
+    background-color: #272727;
+    border-radius: 5px;
+}
+
+.adm-dialog-content {
+    color: #c5c5c5;
+}
+
+.adm-dialog-footer .adm-dialog-action-row {
+    display: flex;
+    align-items: stretch;
+    border-top: 0.5px solid #1b1b1b;
+}
+
+.adm-dialog-footer .adm-dialog-action-row > .adm-dialog-button {
+    padding: 8px;
+    font-size: 15px;
+    line-height: 25px;
+    border-radius: 0;
+    border-right: solid 1px #212121;
+}
+
+.adm-dialog-footer .adm-dialog-action-row > .adm-dialog-button-bold {
+    font-weight: normal;
+}
+
+.adm-button:not(.adm-button-default).adm-button-fill-none {
+    --text-color: #d0d0d0;
+    --background-color: transparent;
+    --border-width: 0px;
+}

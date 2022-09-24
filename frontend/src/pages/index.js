@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { ScreenLoading } from '@components';
 import { isEmpty } from 'lodash';
-import Guest from './Guest'
+import Guest from './Guest';
+import Logged from './Logged';
 import { generateJSXMeshGradient } from "meshgrad";
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getValues } from '@redux/actions/currentUser';
-
-const RootScreens = ({user, isLoading, getCurrentUserAction}) => {
+import { getAllUsers } from '@redux/actions/getAllUsers';
+const RootScreens = ({user, isLoading, getCurrentUserAction, getAllUsersAction}) => {
     const getCurrentUser = async () => {
         const token = await localStorage.getItem('access_token');
         if (!isEmpty(token)) {
@@ -27,7 +28,7 @@ const RootScreens = ({user, isLoading, getCurrentUserAction}) => {
         :
         <GuestContainer style={generateJSXMeshGradient(12)}>
             <BackgroundContainer>
-                {isEmpty(user) ? <Guest/> : null }
+                {isEmpty(user) ? <Guest/> : <Logged/> }
             </BackgroundContainer>
         </GuestContainer>
     )
@@ -74,6 +75,7 @@ export default connect(state => {
     }
   },
   dispatch => ({
-    getCurrentUserAction: () => dispatch(getValues())
+    getCurrentUserAction: () => dispatch(getValues()),
+    getAllUsersAction: () => dispatch(getAllUsers())
   })
 )(RootScreens);
