@@ -5,8 +5,9 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-
-
+// const graphqlHttp = require("express-graphql");
+// const { buildSchema } = require("graphql");
+ 
 
 // Cors Configuration
 app.use(function (req, res, next) {
@@ -23,6 +24,16 @@ dotenv.config();
 // Json Configure
 app.use(express.json());
 
+// app.use('/graphql', graphqlHttp({
+//     schema: buildSchema(`
+//         schema {
+//             query:
+//             mutation: 
+//         }
+//     `),
+//     rootValue: {}
+// }));
+
 // MongoDB Connection
 mongoose.connect(process.env.DB_URI, {}).then(() => {
     console.log("Mongodb Connected Successfully");
@@ -35,6 +46,5 @@ app.listen(process.env.PORT, () => {
 });
 
 fs.readdirSync(__dirname + '/Routes').forEach(function (file) {
-    console.log(file);
     require(__dirname + '/Routes/' + file)(app);
 });

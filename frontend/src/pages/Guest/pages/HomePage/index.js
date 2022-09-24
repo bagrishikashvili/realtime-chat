@@ -22,7 +22,7 @@ const HomePage = () => {
     return (
         <Container>
 
-            <Title>Brave</Title>
+            <Title>Realtime</Title>
             <LoginContainer>
             <Form name="basic" onFinish={onFinish} autoComplete="off">
                 <Form.Item name="username">
