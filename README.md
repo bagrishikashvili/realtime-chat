@@ -2,4 +2,4 @@
 
 Realtime chat app = 🐸
 
-JavaScript, Reactjs, Nodejs, Mongodb, SocketIo
+JavaScript, Reactjs, Redux, Nodejs, Mongodb, SocketIo
