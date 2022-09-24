@@ -1,8 +1,9 @@
 import {
-  START_VALUE_FAIL,
-  START_VALUE_SUCCESS,
-  START_VALUE
+  START_SIGNIN,
+  START_SIGNIN_SUCCESS,
+  START_SIGNIN_FAIL
 } from './types';
+
 
 export default (state = {
   data: {},
@@ -10,20 +11,19 @@ export default (state = {
   loading: false
 }, action) => {
   switch (action.type) {
-    case START_VALUE:
+    case START_SIGNIN:
       return {
         data: {},
         loading: true,
         error: {}
     };
-    case START_VALUE_SUCCESS:
-      let data = action.payload.data ? action.payload.data : action.payload.user;
+    case START_SIGNIN_SUCCESS:
       return {
-          data: data,
+          data: action.payload.data,
           error: {},
           loading: false,
       };
-      case START_VALUE_FAIL:
+      case START_SIGNIN_FAIL:
         return {
             data: {},
             error: action.error.response.data,

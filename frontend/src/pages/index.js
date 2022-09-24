@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { getValues } from '@redux/actions/currentUser';
 
 const RootScreens = ({user, isLoading, getCurrentUserAction}) => {
-    
     const getCurrentUser = async () => {
         const token = await localStorage.getItem('access_token');
         if (!isEmpty(token)) {

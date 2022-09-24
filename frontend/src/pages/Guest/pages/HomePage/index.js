@@ -1,26 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { Form, Input, Button } from 'antd';
 import { Toast } from 'antd-mobile';
+import { connect } from 'react-redux';
+import { login, setCurrentUser } from '@redux/actions/signin';
+import { isEmpty } from "lodash";
 
-const HomePage = () => {
-    const [loading, setLoading] = useState(false);
+const HomePage = ({singin, isLoading, loginAction, setCurrentUserAction}) => {
+
+    useEffect(() => {
+        if (!isEmpty(singin)) {
+            const setTokenToLocalStorage = async () => {
+                await localStorage.setItem('access_token', singin.token);
+                setCurrentUserAction(singin);
+            }
+            setTokenToLocalStorage();
+        }
+    }, [singin]);
 
     const onFinish = async (values) => {
-        setLoading(true);
-        // myApi({
-        //     endpoint: '/login',
-        //     method: 'POST',
-        //     body: {...values}
-        // }).then( async (res) => {
-        //     setLoading(false);
-        // }).catch((err) => {
-        //     setLoading(false);
-        //     Toast.show({
-        //         icon: 'fail',
-        //         content: err.message
-        //     });
-        // });
+        await loginAction(values);
     };
 
 
@@ -35,7 +34,7 @@ const HomePage = () => {
                 <Form.Item name="password">
                     <Input.Password placeholder="Password"/>
                 </Form.Item>
-                <Button block htmlType="submit" loading={loading}>Sign in</Button>
+                <Button block htmlType="submit" loading={isLoading}>Sign in</Button>
             </Form>
             </LoginContainer>
         </Container>
@@ -64,4 +63,14 @@ const Title = styled.div `
     -webkit-text-fill-color: transparent !important;
     line-height: 4rem;
 `
-export default HomePage;
+export default connect(state => {
+    return {
+        singin: state.signIn.data,
+        isLoading: state.signIn.loading
+    }
+  },
+  dispatch => ({
+    loginAction: (values) => dispatch(login(values)),
+    setCurrentUserAction: (user) => dispatch(setCurrentUser(user))
+  })
+)(HomePage);
