@@ -1,38 +1,29 @@
 
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
 import { ScreenLoading } from '@components';
 import { isEmpty } from 'lodash';
 import Guest from './Guest'
 import { generateJSXMeshGradient } from "meshgrad";
 import styled from 'styled-components';
-const RootScreens = () => {
-    const user = useSelector((state) => state.user);
-    const [loadingScreen, setLoadingScreen] = useState(true);
-    // useLayoutEffect(() => {
-    //     document.documentElement.setAttribute(
-    //       'data-prefers-color-scheme', 'dark'
-    //     )
-    //   }, [])
+import { connect } from 'react-redux';
+import { getValues } from '@redux/actions/currentUser';
 
+const RootScreens = ({user, isLoading, getCurrentUserAction}) => {
+    
+    const getCurrentUser = async () => {
+        const token = await localStorage.getItem('access_token');
+        if (!isEmpty(token)) {
+            getCurrentUserAction();
+        }
+    }
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoadingScreen(false);
-        }, 1000)
-    }, [])
-
-    // const getCurrentUser = async () => {
-    //     try {
-    //         const res = await axios.get("http://localhost:8000/api/messages/" + currentChat?._id);
-    //     } catch (err) {
-    //     console.log(err.message);
-    //     }
-    // }
+        getCurrentUser();
+    },[]);
 
 
     return (
-        loadingScreen ? 
+        isLoading ? 
             <ScreenLoading/> 
         :
         <GuestContainer style={generateJSXMeshGradient(12)}>
@@ -76,4 +67,14 @@ const BackgroundContainer = styled.div `
 
     
 `
-export default RootScreens;
+
+export default connect(state => {
+    return {
+        user: state.currentUser.data,
+        isLoading: state.currentUser.loading
+    }
+  },
+  dispatch => ({
+    getCurrentUserAction: () => dispatch(getValues())
+  })
+)(RootScreens);

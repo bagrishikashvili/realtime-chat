@@ -31,12 +31,20 @@ const login = async (req, res) => {
             return res.status(500).json({message: "Invalid Credentials"});
         }
         const token = JWT.sign({id: user._id, username: user.username},  process.env.JWT_SEC, { expiresIn: "1d" });
-        return res.status(200).json({token: token});
-    
+        return res.status(200).json({
+            token: token, 
+            user: {
+                username: user.username,
+                id: user.id,
+                balance: user.balance.toString()
+            }
+        });
     } catch (err) {
         return res.status(500).json(err.message);
     }
 }
+
+
 
 
 module.exports = function (app) {

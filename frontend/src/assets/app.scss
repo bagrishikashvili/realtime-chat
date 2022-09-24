@@ -148,3 +148,8 @@ select:-webkit-autofill:focus {
 .ant-btn:active {
     transform: scale(0.99);
 }
+
+.ant-btn::before {
+    opacity: 0.2;
+    cursor: disabled;
+}

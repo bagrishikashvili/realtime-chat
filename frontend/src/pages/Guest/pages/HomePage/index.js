@@ -1,27 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import { Form, Input, Button } from 'antd';
-import axios from 'axios';
-import { Toast } from 'antd-mobile'
-const HomePage = () => {
+import { Toast } from 'antd-mobile';
 
+const HomePage = () => {
+    const [loading, setLoading] = useState(false);
 
     const onFinish = async (values) => {
-        try {
-            const res = await axios.post("http://localhost:3001/api/login", {values});
-        } catch (err) {
-            Toast.show({
-                icon: 'fail',
-                content: err.response.data.message
-            });
-        }
+        setLoading(true);
+        // myApi({
+        //     endpoint: '/login',
+        //     method: 'POST',
+        //     body: {...values}
+        // }).then( async (res) => {
+        //     setLoading(false);
+        // }).catch((err) => {
+        //     setLoading(false);
+        //     Toast.show({
+        //         icon: 'fail',
+        //         content: err.message
+        //     });
+        // });
     };
-
 
 
     return (
         <Container>
-
             <Title>Realtime</Title>
             <LoginContainer>
             <Form name="basic" onFinish={onFinish} autoComplete="off">
@@ -31,7 +35,7 @@ const HomePage = () => {
                 <Form.Item name="password">
                     <Input.Password placeholder="Password"/>
                 </Form.Item>
-                <Button block htmlType="submit">Sign in</Button>
+                <Button block htmlType="submit" loading={loading}>Sign in</Button>
             </Form>
             </LoginContainer>
         </Container>
