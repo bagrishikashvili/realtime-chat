@@ -11,6 +11,9 @@ const userSchema = mongoose.Schema({
     },
     balance: {
         type: mongoose.Types.Decimal128,
+    },
+    inactive_balance: {
+        type: mongoose.Types.Decimal128,
     }
 });
 
