@@ -1,5 +1,4 @@
-# realtime-chat-app
+# realtime-wallet
 
-Realtime chat app = 🐸
-
+Realtime wallet = 🌙
 JavaScript, Reactjs, Redux, Nodejs, Mongodb, SocketIo
