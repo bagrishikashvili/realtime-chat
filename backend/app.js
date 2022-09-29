@@ -3,11 +3,10 @@
 const fs = require('node:fs');
 const express = require("express");
 const app = express();
+const server = require("http").Server(app);
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-// const graphqlHttp = require("express-graphql");
-// const { buildSchema } = require("graphql");
- 
+const io = require("socket.io")(server, { cors: { origin: "http://localhost:3000" } });
 
 // Cors Configuration
 app.use(function (req, res, next) {
@@ -18,30 +17,32 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Dotenv Configuration
 dotenv.config();
-
-// Json Configure
 app.use(express.json());
-
-// app.use('/graphql', graphqlHttp({
-//     schema: buildSchema(`
-//         schema {
-//             query:
-//             mutation: 
-//         }
-//     `),
-//     rootValue: {}
-// }));
-
-// MongoDB Connection
 mongoose.connect(process.env.DB_URI, {}).then(() => {
     console.log("Mongodb Connected Successfully");
 }).catch((err) => {
     console.log(err);
 });
 
-app.listen(process.env.PORT, () => {                
+io.on("connection", (socket) => {
+    
+    socket.on("join-room", (data) => {
+        const { userName, roomId} = data;
+        socket.join(roomId);
+        io.to(roomId).emit('join-user-room', userName);
+    });
+
+
+    socket.on("leave-room", (data) => {
+        const { userName, roomId } = data;
+        io.to(roomId).emit('leave-user-room', userName);
+        socket.leave(roomId);
+        
+    });
+});
+
+server.listen(process.env.PORT, () => {                
     console.log(`server is running on port ${process.env.PORT}`);
 });
 

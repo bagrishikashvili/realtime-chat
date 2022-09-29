@@ -3,8 +3,21 @@ import styled from 'styled-components';
 import { LoginOutlined} from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Dialog } from 'antd-mobile';
+import { map } from "lodash";
 import { clearCurrentUser } from '@redux/actions/signin';
-const LeftMenuBar = ({clearCurrentUserAction}) => {
+import { getRooms, clearRooms } from '@redux/actions/getRooms';
+import { Link, useHistory } from "react-router-dom";
+const LeftMenuBar = ({clearCurrentUserAction, rooms, clearRoomsActions, getRoomsActions}) => {
+    const navigate = useHistory();
+    useEffect(() => {
+        getRoomsActions();
+
+        return () => {
+            clearRoomsActions();
+        }
+    }, []);
+
+
 
     const logOut = () => {
         Dialog.confirm({
@@ -29,14 +42,38 @@ const LeftMenuBar = ({clearCurrentUserAction}) => {
                         <TextLogo>Realtime</TextLogo>
                         <LogOut onClick={() => logOut()}><LoginOutlined /></LogOut>
                     </LeftColumnHeader>
+                    <RoomsContainer>
+                        {
+                            map(rooms, (item, index) => {
+                                return (
+                                    <MenuItem key={item.roomId} onClick={() => navigate.push(`/room/${item.roomId}`, { room: item.name })}>
+                                        {item.name}
+                                    </MenuItem>
+                                )
+                            })
+                        }
+                    </RoomsContainer>
                 </LeftColumnBody>
             </LeftColumnBlock>
         </LeftColumn>
     )
 }
+const MenuItem = styled.div `
+    padding: 20px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #292929;
+    color: #fff;
+    transition: .2s linear;
+    &:last-child {
+        border-bottom: 0px solid #292929;
+    }
+    &:hover {
+        background-color: #1b1b1b;
+    }
+`
 const LeftColumn = styled.div `
-    min-width: 12rem;
-    width: 33vw;
+    min-width: 22.5rem;
+    width: 22.5rem;
     max-width: 26.5rem;
     height: 100vh;
     position: relative;
@@ -82,13 +119,21 @@ const LogOut = styled.span `
         color: #fff;
     }
 `
+const RoomsContainer = styled.div `
+    display: flex;
+    flex-direction: column;
+
+`
 
 export default connect(state => {
     return {
-        user: state.currentUser.data
+        user: state.currentUser.data,
+        rooms: state.rooms.data
     }
   },
   dispatch => ({
-    clearCurrentUserAction: () => dispatch(clearCurrentUser())
+    clearCurrentUserAction: () => dispatch(clearCurrentUser()),
+    getRoomsActions: () => dispatch(getRooms()),
+    clearRoomsActions: () => dispatch(clearRooms())
   })
 )(LeftMenuBar);

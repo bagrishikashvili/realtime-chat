@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { LeftMenuBar } from '@components'
 import styled from 'styled-components';
 import {
-    HomePage
+    HomePage,
+    RoomPage
 } from './pages'
 
 const Guest = () => {
@@ -11,9 +12,12 @@ const Guest = () => {
         <Router>
             <GuestContainer>
                 <LeftMenuBar/>
-                <Switch>
-                    <Route exact={true} path='/' component={HomePage}/>
-                </Switch>
+                <Container>
+                    <Switch>
+                        <Route exact={true} path='/' component={HomePage}/>
+                        <Route exact={true} path='/room/:room' component={RoomPage}/>
+                    </Switch>
+                </Container>
             </GuestContainer>
         </Router>
     )
@@ -25,5 +29,8 @@ const GuestContainer = styled.div `
     position: relative;
     z-index: 22;
     display: flex;
+`
+const Container = styled.div `
+    flex: 1;
 `
 export default Guest;

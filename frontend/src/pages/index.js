@@ -64,7 +64,6 @@ const BackgroundContainer = styled.div `
         background-image: url('https://web.telegram.org/z/chat-bg-pattern-dark.ad38368a9e8140d0ac7d.png');
         mix-blend-mode: unset;
     }
-
     
 `
 
